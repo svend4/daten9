@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог - Пример универсальных виджетов</title>
+  <link rel="stylesheet" href="../styles/core.css">
+  <link rel="stylesheet" href="../styles/widgets.css">
+  <link rel="stylesheet" href="../styles/themes/catalog.css">
+</head>
+<body class="theme-catalog">
+  <div class="page-wrapper">
+    <!-- Шапка -->
+    <header class="widget-header" style="background: linear-gradient(135deg, #2196f3 0%, #03a9f4 100%); color: white;">
+      <div class="header-container">
+        <div class="header-logo">
+          <h1 style="color: white; margin: 0;">Электроника и Техника</h1>
+        </div>
+        <div class="header-search">
+          <input type="search" placeholder="Поиск товаров..." class="search-input">
+          <button class="search-button">Найти</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="catalog-layout">
+      <!-- Боковая панель с категориями -->
+      <aside class="catalog-sidebar">
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Категории</h3>
+          <ul class="category-list" id="categories"></ul>
+        </div>
+
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Фильтры</h3>
+          <div class="filter-group">
+            <div class="filter-title">Цена</div>
+            <div class="filter-option">
+              <input type="checkbox" id="price1">
+              <label for="price1">До 10 000 ₽</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="price2">
+              <label for="price2">10 000 - 50 000 ₽</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="price3">
+              <label for="price3">50 000 - 100 000 ₽</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="price4">
+              <label for="price4">Более 100 000 ₽</label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <div class="filter-title">Наличие</div>
+            <div class="filter-option">
+              <input type="checkbox" id="inStock" checked>
+              <label for="inStock">В наличии</label>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Основной контент каталога -->
+      <main class="catalog-main">
+        <!-- Управление -->
+        <div class="catalog-controls">
+          <div>
+            <strong id="productsCount">0</strong> товаров найдено
+          </div>
+          <div class="view-mode-buttons">
+            <button class="view-button active" data-view="grid">◫ Сетка</button>
+            <button class="view-button" data-view="list">☰ Список</button>
+          </div>
+        </div>
+
+        <!-- Сетка товаров -->
+        <div class="catalog-grid" id="catalogGrid"></div>
+
+        <!-- Пагинация -->
+        <div class="catalog-pagination">
+          <button class="pagination-button">◄ Пред</button>
+          <button class="pagination-button active">1</button>
+          <button class="pagination-button">2</button>
+          <button class="pagination-button">3</button>
+          <button class="pagination-button">След ►</button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../scripts/template-engine.js"></script>
+  <script src="../scripts/module-loader.js"></script>
+  <script src="../scripts/widget-manager.js"></script>
+
+  <script>
+    // Загрузка и отображение каталога
+    async function loadCatalog() {
+      const response = await fetch('../data/examples/catalog-items.json');
+      const data = await response.json();
+
+      // Загрузить категории
+      const categoriesContainer = document.getElementById('categories');
+      data.categories.forEach(category => {
+        const li = document.createElement('li');
+        li.className = 'category-item';
+        li.innerHTML = `
+          <a href="#${category.id}" class="category-link">
+            ${category.name}
+            <span class="category-count">${category.count}</span>
+          </a>
+        `;
+        categoriesContainer.appendChild(li);
+      });
+
+      // Шаблон карточки товара
+      const productCardTemplate = `
+        <div class="widget-card">
+          <div class="card-image">
+            <img src="{{image}}" alt="{{name}}">
+            {{#if badge}}
+            <span class="card-badge">{{badge}}</span>
+            {{/if}}
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">{{name}}</h3>
+            <p class="card-description">{{description}}</p>
+            <div class="card-price">
+              {{#if oldPrice}}
+              <span class="old-price">{{oldPrice}}</span>
+              {{/if}}
+              <span class="current-price">{{price}}</span>
+            </div>
+            <div class="card-actions">
+              <button class="card-button">В корзину</button>
+            </div>
+            <div class="card-meta" style="margin-top: 10px; font-size: 14px; color: #757575;">
+              ⭐ {{rating}} ({{reviews}} отзывов)
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Рендерим товары
+      const catalogGrid = document.getElementById('catalogGrid');
+      data.products.forEach(product => {
+        const html = templateEngine.render(productCardTemplate, product);
+        catalogGrid.innerHTML += html;
+      });
+
+      // Обновить счетчик
+      document.getElementById('productsCount').textContent = data.products.length;
+
+      // Переключение режимов отображения
+      document.querySelectorAll('.view-button').forEach(button => {
+        button.addEventListener('click', () => {
+          document.querySelectorAll('.view-button').forEach(b => b.classList.remove('active'));
+          button.classList.add('active');
+
+          const view = button.dataset.view;
+          if (view === 'list') {
+            catalogGrid.classList.add('list-view');
+          } else {
+            catalogGrid.classList.remove('list-view');
+          }
+        });
+      });
+    }
+
+    // Инициализация
+    document.addEventListener('DOMContentLoaded', () => {
+      WidgetManager.init({ theme: 'catalog' });
+      loadCatalog();
+    });
+  </script>
+</body>
+</html>

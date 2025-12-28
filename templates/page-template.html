@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{pageTitle}}</title>
+  <link rel="stylesheet" href="../styles/core.css">
+  <link rel="stylesheet" href="../styles/widgets.css">
+  <link rel="stylesheet" href="../styles/themes/{{theme}}.css">
+</head>
+<body class="theme-{{theme}}">
+  <!-- Модульная структура страницы -->
+  <div class="page-wrapper">
+    <!-- Динамический заголовок -->
+    {{header}}
+
+    <!-- Навигация -->
+    {{navigation}}
+
+    <!-- Основной контент -->
+    <main class="main-content">
+      {{mainContent}}
+    </main>
+
+    <!-- Подвал -->
+    {{footer}}
+  </div>
+
+  <!-- Скрипты для управления модулями -->
+  <script src="../scripts/template-engine.js"></script>
+  <script src="../scripts/module-loader.js"></script>
+  <script src="../scripts/widget-manager.js"></script>
+
+  <!-- Инициализация -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      WidgetManager.init();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<footer class="widget-footer" data-widget-type="footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      {{#if showLogo}}
+      <div class="footer-logo">
+        <h3>{{title}}</h3>
+      </div>
+      {{/if}}
+
+      {{#if showLinks}}
+      <div class="footer-links">
+        <h4>Ссылки</h4>
+        <ul>
+          {{#each links}}
+          <li><a href="{{url}}">{{label}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+
+      {{#if showSocial}}
+      <div class="footer-social">
+        <h4>Мы в социальных сетях</h4>
+        <div class="social-links">
+          {{#each socialLinks}}
+          <a href="{{url}}" class="social-link" target="_blank" rel="noopener">{{name}}</a>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+
+      {{#if showContact}}
+      <div class="footer-contact">
+        <h4>Контакты</h4>
+        <p>{{contactInfo}}</p>
+      </div>
+      {{/if}}
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {{year}} {{copyright}}. Все права защищены.</p>
+    </div>
+  </div>
+</footer>

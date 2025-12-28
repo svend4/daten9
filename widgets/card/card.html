@@ -1,0 +1,43 @@
+<div class="widget-card" data-widget-type="card">
+  {{#if image}}
+  <div class="card-image">
+    <img src="{{image}}" alt="{{title}}">
+    {{#if badge}}
+    <span class="card-badge">{{badge}}</span>
+    {{/if}}
+  </div>
+  {{/if}}
+
+  <div class="card-content">
+    {{#if category}}
+    <span class="card-category">{{category}}</span>
+    {{/if}}
+
+    <h3 class="card-title">{{title}}</h3>
+
+    {{#if description}}
+    <p class="card-description">{{description}}</p>
+    {{/if}}
+
+    {{#if price}}
+    <div class="card-price">
+      {{#if oldPrice}}
+      <span class="old-price">{{oldPrice}}</span>
+      {{/if}}
+      <span class="current-price">{{price}}</span>
+    </div>
+    {{/if}}
+
+    {{#if showButton}}
+    <div class="card-actions">
+      <button class="card-button">{{buttonText}}</button>
+    </div>
+    {{/if}}
+
+    {{#if meta}}
+    <div class="card-meta">
+      {{meta}}
+    </div>
+    {{/if}}
+  </div>
+</div>

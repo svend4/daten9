@@ -1,0 +1,145 @@
+/**
+ * Restaurant Theme - Тема для меню ресторана
+ */
+
+.theme-restaurant {
+  --color-primary: #d4af37;
+  --color-secondary: #c19a6b;
+  --color-accent: #8b4513;
+  --color-text: #3e2723;
+  --color-text-light: #6d4c41;
+  --color-background: #fff8e1;
+  --color-background-alt: #ffecb3;
+  --color-border: #d7ccc8;
+
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><rect fill="%23fff8e1" width="80" height="80"/><g fill="%23ffe0b2" fill-opacity="0.1"><path d="M0 0h80v80H0z"/></g></svg>');
+}
+
+/* Стили для меню ресторана */
+.theme-restaurant .menu-header {
+  background: linear-gradient(135deg, #d4af37 0%, #c19a6b 100%);
+  color: white;
+  padding: var(--spacing-xxl);
+  text-align: center;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.theme-restaurant .menu-header h1 {
+  font-family: 'Georgia', serif;
+  font-size: 3rem;
+  margin-bottom: var(--spacing-sm);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.theme-restaurant .menu-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.theme-restaurant .menu-categories {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.theme-restaurant .menu-categories a {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: white;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-full);
+  color: var(--color-primary);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.theme-restaurant .menu-categories a:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.theme-restaurant .widget-card {
+  background: white;
+  border: 2px solid var(--color-border);
+}
+
+.theme-restaurant .card-title {
+  font-family: 'Georgia', serif;
+  color: var(--color-accent);
+}
+
+.theme-restaurant .card-price {
+  font-family: 'Georgia', serif;
+}
+
+.theme-restaurant .menu-footer {
+  background-color: var(--color-accent);
+  color: white;
+  padding: var(--spacing-xl);
+  text-align: center;
+  border-radius: var(--radius-lg);
+  margin-top: var(--spacing-xxl);
+}
+
+/* Модификаторы для блюд */
+.menu-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item-name {
+  font-family: 'Georgia', serif;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-xs);
+}
+
+.menu-item-description {
+  color: var(--color-text-light);
+  font-size: var(--font-size-small);
+}
+
+.menu-item-price {
+  font-family: 'Georgia', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* Категории меню */
+.menu-category {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.menu-category-title {
+  font-family: 'Georgia', serif;
+  font-size: 2rem;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 3px solid var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .theme-restaurant .menu-header h1 {
+    font-size: 2rem;
+  }
+
+  .menu-item {
+    grid-template-columns: 1fr;
+  }
+}

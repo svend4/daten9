@@ -1,0 +1,40 @@
+/**
+ * Default Theme - Стандартная универсальная тема
+ */
+
+.theme-default {
+  --color-primary: #3498db;
+  --color-secondary: #2ecc71;
+  --color-accent: #e74c3c;
+  --color-text: #2c3e50;
+  --color-text-light: #7f8c8d;
+  --color-background: #ffffff;
+  --color-background-alt: #ecf0f1;
+  --color-border: #bdc3c7;
+}
+
+.theme-default .widget-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+}
+
+.theme-default .header-logo h1 {
+  color: white;
+}
+
+.theme-default .nav-link {
+  color: white;
+}
+
+.theme-default .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.theme-default .widget-card {
+  border: 1px solid var(--color-border);
+}
+
+.theme-default .main-content {
+  background-color: var(--color-background-alt);
+}

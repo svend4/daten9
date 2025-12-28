@@ -1,0 +1,175 @@
+{
+  "catalog": {
+    "name": "Электроника и Техника",
+    "description": "Широкий выбор электроники и бытовой техники"
+  },
+  "categories": [
+    {
+      "id": "smartphones",
+      "name": "Смартфоны",
+      "count": 45
+    },
+    {
+      "id": "laptops",
+      "name": "Ноутбуки",
+      "count": 32
+    },
+    {
+      "id": "tablets",
+      "name": "Планшеты",
+      "count": 18
+    },
+    {
+      "id": "accessories",
+      "name": "Аксессуары",
+      "count": 124
+    },
+    {
+      "id": "audio",
+      "name": "Аудио",
+      "count": 56
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "category": "smartphones",
+      "name": "Смартфон ProMax 15",
+      "description": "Флагманский смартфон с 6.7\" дисплеем и тройной камерой",
+      "price": "89 990 ₽",
+      "oldPrice": "99 990 ₽",
+      "image": "https://via.placeholder.com/400x400/4169E1/FFF?text=ProMax+15",
+      "badge": "ХИТ",
+      "rating": 4.8,
+      "reviews": 234,
+      "inStock": true
+    },
+    {
+      "id": 2,
+      "category": "smartphones",
+      "name": "Смартфон Galaxy S23",
+      "description": "Премиальный Android-смартфон с AMOLED дисплеем",
+      "price": "79 990 ₽",
+      "image": "https://via.placeholder.com/400x400/32CD32/FFF?text=Galaxy+S23",
+      "rating": 4.7,
+      "reviews": 189,
+      "inStock": true
+    },
+    {
+      "id": 3,
+      "category": "laptops",
+      "name": "Ноутбук UltraBook Pro",
+      "description": "Мощный ноутбук для работы и творчества, 16GB RAM",
+      "price": "124 990 ₽",
+      "oldPrice": "139 990 ₽",
+      "image": "https://via.placeholder.com/400x400/FF69B4/FFF?text=UltraBook",
+      "badge": "SALE",
+      "rating": 4.9,
+      "reviews": 156,
+      "inStock": true
+    },
+    {
+      "id": 4,
+      "category": "laptops",
+      "name": "Ноутбук Gaming X",
+      "description": "Игровой ноутбук с RTX 4060, 32GB RAM",
+      "price": "159 990 ₽",
+      "image": "https://via.placeholder.com/400x400/FF4500/FFF?text=Gaming+X",
+      "rating": 4.6,
+      "reviews": 98,
+      "inStock": true
+    },
+    {
+      "id": 5,
+      "category": "tablets",
+      "name": "Планшет Tab Pro 12",
+      "description": "Профессиональный планшет с стилусом, 12.9\" дисплей",
+      "price": "69 990 ₽",
+      "image": "https://via.placeholder.com/400x400/9370DB/FFF?text=Tab+Pro",
+      "rating": 4.5,
+      "reviews": 112,
+      "inStock": true
+    },
+    {
+      "id": 6,
+      "category": "tablets",
+      "name": "Планшет MediaPad 10",
+      "description": "Доступный планшет для учебы и развлечений",
+      "price": "24 990 ₽",
+      "oldPrice": "29 990 ₽",
+      "image": "https://via.placeholder.com/400x400/20B2AA/FFF?text=MediaPad",
+      "badge": "-17%",
+      "rating": 4.3,
+      "reviews": 87,
+      "inStock": true
+    },
+    {
+      "id": 7,
+      "category": "audio",
+      "name": "Наушники AirPods Max",
+      "description": "Премиальные беспроводные наушники с шумоподавлением",
+      "price": "54 990 ₽",
+      "image": "https://via.placeholder.com/400x400/FFD700/333?text=AirPods",
+      "badge": "NEW",
+      "rating": 4.8,
+      "reviews": 203,
+      "inStock": true
+    },
+    {
+      "id": 8,
+      "category": "audio",
+      "name": "Колонка Smart Speaker",
+      "description": "Умная колонка с голосовым ассистентом",
+      "price": "12 990 ₽",
+      "image": "https://via.placeholder.com/400x400/708090/FFF?text=Speaker",
+      "rating": 4.4,
+      "reviews": 145,
+      "inStock": true
+    },
+    {
+      "id": 9,
+      "category": "accessories",
+      "name": "Чехол Premium для смартфона",
+      "description": "Защитный чехол из натуральной кожи",
+      "price": "2 990 ₽",
+      "image": "https://via.placeholder.com/400x400/8B4513/FFF?text=Case",
+      "rating": 4.6,
+      "reviews": 421,
+      "inStock": true
+    },
+    {
+      "id": 10,
+      "category": "accessories",
+      "name": "Зарядное устройство Fast Charge",
+      "description": "Быстрая зарядка 65W с USB-C кабелем",
+      "price": "3 490 ₽",
+      "image": "https://via.placeholder.com/400x400/000080/FFF?text=Charger",
+      "rating": 4.7,
+      "reviews": 312,
+      "inStock": true
+    },
+    {
+      "id": 11,
+      "category": "smartphones",
+      "name": "Смартфон Pixel 8",
+      "description": "Камерофон от Google с чистым Android",
+      "price": "67 990 ₽",
+      "image": "https://via.placeholder.com/400x400/00CED1/333?text=Pixel+8",
+      "rating": 4.6,
+      "reviews": 167,
+      "inStock": true
+    },
+    {
+      "id": 12,
+      "category": "laptops",
+      "name": "Ноутбук WorkBook Air",
+      "description": "Легкий и тонкий ноутбук для мобильной работы",
+      "price": "84 990 ₽",
+      "image": "https://via.placeholder.com/400x400/C0C0C0/333?text=WorkBook",
+      "badge": "Легкий",
+      "rating": 4.5,
+      "reviews": 134,
+      "inStock": true
+    }
+  ]
+}

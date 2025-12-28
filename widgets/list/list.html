@@ -1,0 +1,41 @@
+<div class="widget-list" data-widget-type="list">
+  {{#if title}}
+  <h2 class="list-title">{{title}}</h2>
+  {{/if}}
+
+  <ul class="list-items {{listStyle}}">
+    {{#each items}}
+    <li class="list-item">
+      {{#if icon}}
+      <span class="item-icon">{{icon}}</span>
+      {{/if}}
+
+      <div class="item-content">
+        {{#if title}}
+        <h4 class="item-title">{{title}}</h4>
+        {{/if}}
+
+        {{#if description}}
+        <p class="item-description">{{description}}</p>
+        {{/if}}
+
+        {{#if link}}
+        <a href="{{link}}" class="item-link">Подробнее →</a>
+        {{/if}}
+      </div>
+
+      {{#if action}}
+      <div class="item-action">
+        {{action}}
+      </div>
+      {{/if}}
+    </li>
+    {{/each}}
+  </ul>
+
+  {{#if showMore}}
+  <div class="list-footer">
+    <button class="load-more-button">{{moreText}}</button>
+  </div>
+  {{/if}}
+</div>

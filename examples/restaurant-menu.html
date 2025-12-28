@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Меню ресторана - Пример универсальных виджетов</title>
+  <link rel="stylesheet" href="../styles/core.css">
+  <link rel="stylesheet" href="../styles/widgets.css">
+  <link rel="stylesheet" href="../styles/themes/restaurant.css">
+</head>
+<body class="theme-restaurant">
+  <div class="page-wrapper">
+    <!-- Шапка меню -->
+    <header class="menu-header">
+      <h1>Вкусная еда</h1>
+      <p class="menu-subtitle">Итальянская кухня в сердце города</p>
+    </header>
+
+    <!-- Категории меню -->
+    <nav class="menu-categories">
+      <a href="#appetizers">🥗 Закуски</a>
+      <a href="#pasta">🍝 Паста</a>
+      <a href="#pizza">🍕 Пицца</a>
+      <a href="#desserts">🍰 Десерты</a>
+      <a href="#drinks">🥤 Напитки</a>
+    </nav>
+
+    <!-- Контент меню -->
+    <main class="menu-content" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+      <!-- Категория: Закуски -->
+      <section id="appetizers" class="menu-category">
+        <h2 class="menu-category-title">🥗 Закуски</h2>
+        <div id="appetizers-items"></div>
+      </section>
+
+      <!-- Категория: Паста -->
+      <section id="pasta" class="menu-category">
+        <h2 class="menu-category-title">🍝 Паста</h2>
+        <div id="pasta-items"></div>
+      </section>
+
+      <!-- Категория: Пицца -->
+      <section id="pizza" class="menu-category">
+        <h2 class="menu-category-title">🍕 Пицца</h2>
+        <div id="pizza-items"></div>
+      </section>
+
+      <!-- Категория: Десерты -->
+      <section id="desserts" class="menu-category">
+        <h2 class="menu-category-title">🍰 Десерты</h2>
+        <div id="desserts-items"></div>
+      </section>
+
+      <!-- Категория: Напитки -->
+      <section id="drinks" class="menu-category">
+        <h2 class="menu-category-title">🥤 Напитки</h2>
+        <div id="drinks-items"></div>
+      </section>
+    </main>
+
+    <!-- Футер -->
+    <footer class="menu-footer">
+      <h3>Приходите к нам!</h3>
+      <p>ул. Примерная, д. 1, Москва</p>
+      <p>Телефон: +7 (999) 123-45-67</p>
+      <p>Время работы: 11:00 - 23:00</p>
+    </footer>
+  </div>
+
+  <script src="../scripts/template-engine.js"></script>
+  <script src="../scripts/module-loader.js"></script>
+  <script src="../scripts/widget-manager.js"></script>
+
+  <script>
+    // Загрузка и отображение меню
+    async function loadMenu() {
+      const response = await fetch('../data/examples/restaurant-menu.json');
+      const data = await response.json();
+
+      // Шаблон для элемента меню
+      const menuItemTemplate = `
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">{{name}}</div>
+            <div class="menu-item-description">{{description}}</div>
+          </div>
+          <div class="menu-item-price">{{price}}</div>
+        </div>
+      `;
+
+      // Рендерим каждую категорию
+      data.menu.forEach(category => {
+        const container = document.getElementById(`${category.category}-items`);
+        if (container) {
+          category.items.forEach(item => {
+            const html = templateEngine.render(menuItemTemplate, item);
+            container.innerHTML += html;
+          });
+        }
+      });
+    }
+
+    // Инициализация
+    document.addEventListener('DOMContentLoaded', () => {
+      WidgetManager.init({ theme: 'restaurant' });
+      loadMenu();
+    });
+  </script>
+</body>
+</html>

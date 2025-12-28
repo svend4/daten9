@@ -1,0 +1,65 @@
+<div class="widget-form" data-widget-type="form">
+  {{#if title}}
+  <h2 class="form-title">{{title}}</h2>
+  {{/if}}
+
+  {{#if description}}
+  <p class="form-description">{{description}}</p>
+  {{/if}}
+
+  <form class="form" data-form-id="{{formId}}">
+    {{#each fields}}
+    <div class="form-field">
+      {{#if label}}
+      <label for="{{name}}" class="form-label">
+        {{label}}
+        {{#if required}}<span class="required">*</span>{{/if}}
+      </label>
+      {{/if}}
+
+      {{#if type === 'textarea'}}
+      <textarea
+        id="{{name}}"
+        name="{{name}}"
+        class="form-textarea"
+        placeholder="{{placeholder}}"
+        {{#if required}}required{{/if}}
+      ></textarea>
+      {{else if type === 'select'}}
+      <select
+        id="{{name}}"
+        name="{{name}}"
+        class="form-select"
+        {{#if required}}required{{/if}}
+      >
+        {{#each options}}
+        <option value="{{value}}">{{label}}</option>
+        {{/each}}
+      </select>
+      {{else}}
+      <input
+        type="{{type}}"
+        id="{{name}}"
+        name="{{name}}"
+        class="form-input"
+        placeholder="{{placeholder}}"
+        {{#if required}}required{{/if}}
+      >
+      {{/if}}
+
+      {{#if hint}}
+      <small class="form-hint">{{hint}}</small>
+      {{/if}}
+    </div>
+    {{/each}}
+
+    <div class="form-actions">
+      <button type="submit" class="form-submit">{{submitText}}</button>
+      {{#if showReset}}
+      <button type="reset" class="form-reset">{{resetText}}</button>
+      {{/if}}
+    </div>
+  </form>
+
+  <div class="form-message" style="display: none;"></div>
+</div>

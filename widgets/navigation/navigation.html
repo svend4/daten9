@@ -1,0 +1,32 @@
+<nav class="widget-navigation" data-widget-type="navigation">
+  {{#if showBreadcrumbs}}
+  <div class="breadcrumbs">
+    {{#each breadcrumbs}}
+    <a href="{{url}}" class="breadcrumb-item">{{label}}</a>
+    {{#if @last}}{{else}}<span class="separator">/</span>{{/if}}
+    {{/each}}
+  </div>
+  {{/if}}
+
+  <ul class="nav-menu {{menuStyle}}">
+    {{#each menuItems}}
+    <li class="nav-item {{#if active}}active{{/if}}">
+      <a href="{{url}}" class="nav-link">
+        {{#if icon}}<span class="nav-icon">{{icon}}</span>{{/if}}
+        <span class="nav-label">{{label}}</span>
+        {{#if badge}}<span class="nav-badge">{{badge}}</span>{{/if}}
+      </a>
+
+      {{#if children}}
+      <ul class="nav-submenu">
+        {{#each children}}
+        <li class="nav-subitem">
+          <a href="{{url}}" class="nav-sublink">{{label}}</a>
+        </li>
+        {{/each}}
+      </ul>
+      {{/if}}
+    </li>
+    {{/each}}
+  </ul>
+</nav>

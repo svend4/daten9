@@ -1,0 +1,31 @@
+<header class="widget-header" data-widget-type="header">
+  <div class="header-container">
+    <div class="header-logo">
+      {{#if logo}}
+      <img src="{{logo}}" alt="{{title}}">
+      {{/if}}
+      <h1>{{title}}</h1>
+    </div>
+
+    {{#if showNav}}
+    <nav class="header-nav">
+      {{#each navItems}}
+      <a href="{{url}}" class="nav-link">{{label}}</a>
+      {{/each}}
+    </nav>
+    {{/if}}
+
+    {{#if showSearch}}
+    <div class="header-search">
+      <input type="search" placeholder="{{searchPlaceholder}}" class="search-input">
+      <button class="search-button">Поиск</button>
+    </div>
+    {{/if}}
+
+    {{#if showActions}}
+    <div class="header-actions">
+      {{actions}}
+    </div>
+    {{/if}}
+  </div>
+</header>

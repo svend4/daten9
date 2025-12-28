@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{menuTitle}} - Меню</title>
+  <link rel="stylesheet" href="../styles/core.css">
+  <link rel="stylesheet" href="../styles/widgets.css">
+  <link rel="stylesheet" href="../styles/themes/restaurant.css">
+</head>
+<body class="theme-restaurant menu-page">
+  <div class="page-wrapper">
+    <!-- Шапка меню -->
+    <header class="menu-header">
+      <h1>{{menuTitle}}</h1>
+      <p class="menu-subtitle">{{menuSubtitle}}</p>
+    </header>
+
+    <!-- Категории меню (модульные блоки) -->
+    <nav class="menu-categories">
+      {{categories}}
+    </nav>
+
+    <!-- Контент меню -->
+    <main class="menu-content">
+      {{menuItems}}
+    </main>
+
+    <!-- Футер -->
+    <footer class="menu-footer">
+      {{footerContent}}
+    </footer>
+  </div>
+
+  <script src="../scripts/template-engine.js"></script>
+  <script src="../scripts/module-loader.js"></script>
+  <script src="../scripts/widget-manager.js"></script>
+</body>
+</html>
