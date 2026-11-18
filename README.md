@@ -1,311 +1,82 @@
-# Универсальные шаблоны виджетов
+# daten9 — Универсальные шаблоны виджетов и динамических веб-страниц
 
-Модульная система для создания универсальных веб-страниц любого типа с поддержкой динамических данных, тем и плагинов.
+Репозиторий посвящён модульной системе универсальных HTML/CSS/JS-шаблонов и виджетов для сборки веб-страниц с поддержкой статических и динамических данных, тем оформления и плагинов.
 
-## Особенности
+> **Состояние ветки `main`:** в основной ветке `main` на данный момент размещены только `README.md` и `LICENSE`. Полная реализация системы шаблонов, виджетов, примеров и документации находится в неслитой ветке [`claude/universal-widget-templates-5DOXm`](../../tree/claude/universal-widget-templates-5DOXm).
 
-- **Модульная архитектура** - легко добавляйте и удаляйте виджеты
-- **Система шаблонов** - HTML с заглушками `{{placeholder}}` для статических и динамических данных
-- **Готовые темы** - темы для ресторанов, каталогов и других сфер
-- **Универсальные виджеты** - header, footer, card, list, navigation, gallery, form
-- **Template Engine** - поддержка условий `{{#if}}` и циклов `{{#each}}`
-- **Система плагинов** - расширяйте функциональность через хуки
-- **Адаптивный дизайн** - работает на всех устройствах
-- **CSS переменные** - легкая кастомизация через CSS
+## Возможности (по ветке `claude/universal-widget-templates-5DOXm`)
+
+- **Движок шаблонов (`TemplateEngine`, `scripts/template-engine.js`)**: подстановка заглушек `{{placeholder}}`, условные блоки `{{#if condition}}...{{/if}}`, циклы `{{#each items}}...{{/each}}`, загрузка шаблонов (`loadTemplate`), рендеринг именованных шаблонов (`renderTemplate`) и кешируемая компиляция (`compile`).
+- **Загрузчик модулей (`ModuleLoader`, `scripts/module-loader.js`)**: регистрация, динамическая загрузка и выгрузка модулей с поддержкой хуков (`beforeLoad`, `afterLoad`).
+- **Менеджер виджетов (`WidgetManager`, `scripts/widget-manager.js`)**: автосканирование элементов с `data-widget-type`, программное создание и удаление виджетов (`createWidget`, `removeWidget`), группировка (`createGroup`, `addToGroup`, `removeGroup`, `getGroup`), управление темами (`applyTheme`, `registerTheme`) и экспорт/импорт конфигурации (`exportConfig`, `importConfig`).
+- **7 универсальных виджетов**: `header`, `footer`, `card`, `list`, `navigation`, `gallery`, `form`.
+- **Система тем на CSS-переменных**: `default`, `restaurant`, `catalog`.
 
 ## Структура проекта
 
-```
+### Ветка `main`
+
+- `LICENSE` — текст лицензии GNU Affero General Public License v3.
+- `README.md` — описание проекта.
+
+### Ветка `claude/universal-widget-templates-5DOXm`
+
+```text
 ├── index.html                 # Главная демо-страница
-├── templates/                 # Базовые шаблоны страниц
-│   ├── widget-base.html       # Базовый шаблон виджета
-│   ├── page-template.html     # Универсальный шаблон страницы
-│   ├── menu-template.html     # Шаблон для меню
-│   └── catalog-template.html  # Шаблон для каталога
-├── widgets/                   # Универсальные виджеты
-│   ├── header/                # Шапка сайта
-│   ├── footer/                # Подвал
-│   ├── card/                  # Карточка товара/услуги
-│   ├── list/                  # Список
-│   ├── navigation/            # Навигация
-│   ├── gallery/               # Галерея
-│   └── form/                  # Форма
-├── styles/                    # Стили
+├── README.md                  # Документация в ветке реализации
+├── templates/                 # Базовые HTML-шаблоны
+│   ├── widget-base.html
+│   ├── page-template.html
+│   ├── menu-template.html
+│   └── catalog-template.html
+├── widgets/                   # Модули виджетов
+│   ├── header/
+│   ├── footer/
+│   ├── card/
+│   ├── list/
+│   ├── navigation/
+│   ├── gallery/
+│   └── form/
+├── styles/
 │   ├── core.css               # Базовые стили
 │   ├── widgets.css            # Стили виджетов
-│   └── themes/                # Темы
-│       ├── default.css        # Стандартная тема
-│       ├── restaurant.css     # Тема для ресторанов
-│       └── catalog.css        # Тема для каталогов
-├── scripts/                   # JavaScript
+│   └── themes/
+│       ├── default.css
+│       ├── restaurant.css
+│       └── catalog.css
+├── scripts/
 │   ├── template-engine.js     # Движок шаблонов
 │   ├── module-loader.js       # Загрузчик модулей
 │   └── widget-manager.js      # Менеджер виджетов
 ├── data/examples/             # Примеры данных
-│   ├── restaurant-menu.json   # Данные меню ресторана
-│   └── catalog-items.json     # Данные каталога
-├── examples/                  # Примеры использования
-│   ├── restaurant-menu.html   # Меню ресторана
-│   └── catalog.html           # Каталог товаров
-└── docs/                      # Документация
-    ├── USAGE.md               # Руководство пользователя
-    └── API.md                 # API документация
+│   ├── restaurant-menu.json   # Пример данных меню ресторана
+│   └── catalog-items.json     # Пример данных каталога товаров
+├── examples/
+│   ├── restaurant-menu.html   # Демо меню ресторана
+│   └── catalog.html           # Демо каталога товаров
+└── docs/
+    ├── USAGE.md               # Руководство по использованию
+    └── API.md                 # Справочник API
 ```
 
-## Быстрый старт
+## Стек и использование
 
-### 1. Базовая страница
-
-```html
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Моя страница</title>
-
-  <link rel="stylesheet" href="styles/core.css">
-  <link rel="stylesheet" href="styles/widgets.css">
-  <link rel="stylesheet" href="styles/themes/default.css">
-</head>
-<body class="theme-default">
-  <div class="page-wrapper">
-    <main class="main-content">
-      <h1>Привет, мир!</h1>
-    </main>
-  </div>
-
-  <script src="scripts/template-engine.js"></script>
-  <script src="scripts/module-loader.js"></script>
-  <script src="scripts/widget-manager.js"></script>
-  <script>
-    WidgetManager.init({ theme: 'default' });
-  </script>
-</body>
-</html>
-```
-
-### 2. Использование шаблонизатора
-
-```javascript
-// Простой шаблон
-const template = '<h1>{{title}}</h1><p>{{description}}</p>';
-const data = { title: 'Заголовок', description: 'Описание' };
-const html = templateEngine.render(template, data);
-
-// С условиями
-const template = `
-  {{#if discount}}
-  <span class="badge">Скидка!</span>
-  {{/if}}
-`;
-
-// С циклами
-const template = `
-  {{#each items}}
-  <div>{{name}} - {{price}}</div>
-  {{/each}}
-`;
-```
-
-### 3. Создание виджета
-
-```javascript
-WidgetManager.createWidget('card', {
-  container: '#container',
-  data: {
-    title: 'Товар',
-    description: 'Описание товара',
-    price: '1000 ₽',
-    image: 'path/to/image.jpg'
-  }
-});
-```
-
-## Примеры использования
-
-### Меню ресторана
+- **Стек:** HTML5, CSS3 (CSS-переменные), Vanilla JavaScript (без сторонних зависимостей).
+- **Использование (из ветки `claude/universal-widget-templates-5DOXm`):**
 
 ```bash
-# Откройте в браузере
-examples/restaurant-menu.html
+git checkout claude/universal-widget-templates-5DOXm
 ```
 
-Полнофункциональное меню ресторана с:
-- Категориями блюд
-- Карточками блюд с описанием и ценами
-- Адаптивным дизайном
-- Тематическим оформлением
+После переключения ветки откройте в браузере `index.html`, `examples/restaurant-menu.html` или `examples/catalog.html` (или поднимите любой статический веб-сервер в корне проекта для загрузки JSON/шаблонов через `fetch`). Подробные примеры подключения API приведены в `docs/USAGE.md` и `docs/API.md`.
 
-### Каталог товаров
+## Ветки репозитория
 
-```bash
-# Откройте в браузере
-examples/catalog.html
-```
-
-Каталог товаров с:
-- Фильтрацией по категориям
-- Сеткой товаров
-- Переключением режимов отображения
-- Пагинацией
-
-## Доступные виджеты
-
-| Виджет | Описание | Пример использования |
-|--------|----------|---------------------|
-| **Header** | Шапка сайта с навигацией | Меню, логотип, поиск |
-| **Footer** | Подвал с информацией | Ссылки, контакты, соцсети |
-| **Card** | Универсальная карточка | Товары, услуги, статьи |
-| **List** | Список элементов | Меню, новости, функции |
-| **Navigation** | Навигационное меню | Основная навигация, хлебные крошки |
-| **Gallery** | Галерея изображений | Портфолио, фото товаров |
-| **Form** | Форма ввода | Обратная связь, регистрация |
-
-## Темы
-
-### Default
-Универсальная стандартная тема для любых проектов.
-
-```javascript
-WidgetManager.applyTheme('default');
-```
-
-### Restaurant
-Тема для ресторанов, кафе, баров с теплыми цветами и элегантным дизайном.
-
-```javascript
-WidgetManager.applyTheme('restaurant');
-```
-
-### Catalog
-Тема для каталогов товаров/услуг с акцентом на удобство просмотра.
-
-```javascript
-WidgetManager.applyTheme('catalog');
-```
-
-### Создание своей темы
-
-```css
-/* styles/themes/my-theme.css */
-.theme-my-theme {
-  --color-primary: #your-color;
-  --color-secondary: #your-color;
-  --color-accent: #your-color;
-  /* ... */
-}
-```
-
-```javascript
-WidgetManager.registerTheme('my-theme', {
-  cssUrl: 'styles/themes/my-theme.css'
-});
-WidgetManager.applyTheme('my-theme');
-```
-
-## API
-
-### Template Engine
-
-```javascript
-// Рендер шаблона
-templateEngine.render(template, data);
-
-// Компиляция для повторного использования
-const compiled = templateEngine.compile(template);
-compiled(data1);
-compiled(data2);
-```
-
-### Module Loader
-
-```javascript
-// Регистрация модуля
-moduleLoader.register('myModule', config);
-
-// Загрузка модуля
-await moduleLoader.load('myModule', '#container', data);
-
-// Выгрузка модуля
-await moduleLoader.unload('myModule');
-```
-
-### Widget Manager
-
-```javascript
-// Инициализация
-WidgetManager.init({ theme: 'default' });
-
-// Создание виджета
-const id = WidgetManager.createWidget(type, config);
-
-// Группировка виджетов
-WidgetManager.createGroup('group1', [id1, id2]);
-
-// Применение темы
-WidgetManager.applyTheme('restaurant');
-
-// Экспорт/импорт конфигурации
-const config = WidgetManager.exportConfig();
-WidgetManager.importConfig(config);
-```
-
-Полная документация в [docs/API.md](docs/API.md)
-
-## Применение
-
-Система подходит для создания:
-
-- **Меню ресторанов** - красивые интерактивные меню
-- **Каталоги товаров** - интернет-магазины, маркетплейсы
-- **Каталоги услуг** - салоны, студии, сервисы
-- **Портфолио** - галереи работ
-- **Лендинги** - посадочные страницы
-- **Корпоративные сайты** - о компании, услуги
-- **Блоги** - статьи, новости
-- **Документация** - техническая документация
-
-## Технологии
-
-- **HTML5** - семантическая разметка
-- **CSS3** - современные стили с переменными
-- **Vanilla JavaScript** - без зависимостей
-- **JSON** - формат данных
-- **Модульная архитектура** - расширяемость
-
-## Преимущества
-
-- ✅ Нет зависимостей - чистый JavaScript
-- ✅ Легковесный - минимальный размер файлов
-- ✅ Модульный - используйте только нужное
-- ✅ Расширяемый - добавляйте свои виджеты
-- ✅ Адаптивный - работает на всех устройствах
-- ✅ Простой API - легко освоить
-- ✅ Хорошо документирован
-- ✅ Open Source
-
-## Документация
-
-- [Руководство по использованию](docs/USAGE.md)
-- [API документация](docs/API.md)
-- [Примеры](examples/)
-
-## Поддержка браузеров
-
-- Chrome/Edge (последние версии) ✅
-- Firefox (последние версии) ✅
-- Safari (последние версии) ✅
-- IE11+ (с полифиллами) ⚠️
+- `main` — защищённая основная ветка (`LICENSE`, `README.md`).
+- `claude/universal-widget-templates-5DOXm` — неслитая ветка с полной реализацией системы шаблонов, виджетов, тем, примеров и документации (`USAGE.md`, `API.md`).
+- `codex/readme-overview-20261118` — неслитая ветка с открытым draft PR [#3](../../pull/3) («Add concise project README»), содержащая краткое описание по метаданным репозитория.
+- `copilot/create-universal-widget-templates` — ветка закрытых PR [#1](../../pull/1) и [#2](../../pull/2); содержит только исходный файл `README.md` и начальный план в описании PR #1.
 
 ## Лицензия
 
-MIT License - используйте свободно в любых проектах.
-
-## Автор
-
-Создано как универсальное решение для быстрой разработки веб-страниц.
-
----
-
-**Начните работу прямо сейчас!** Откройте `index.html` в браузере или изучите примеры в папке `examples/`
+В ветке `main` проект распространяется под лицензией **GNU Affero General Public License v3** (см. файл `LICENSE`). В `README.md` ветки `claude/universal-widget-templates-5DOXm` дополнительно упоминалась лицензия MIT.
