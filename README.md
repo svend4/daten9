@@ -48,7 +48,7 @@
 │   ├── template-engine.js     # Движок шаблонов
 │   ├── module-loader.js       # Загрузчик модулей
 │   └── widget-manager.js      # Менеджер виджетов
-├── data/examples/             # Примеры данных
+├── data/examples/
 │   ├── restaurant-menu.json   # Пример данных меню ресторана
 │   └── catalog-items.json     # Пример данных каталога товаров
 ├── examples/
